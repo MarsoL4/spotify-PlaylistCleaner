@@ -1,12 +1,27 @@
+import os
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import time
 from spotipy.exceptions import SpotifyException
+from dotenv import load_dotenv
 
-# Preencha com suas Credenciais do Spotify Developer Dashboard
-CLIENT_ID = ''
-CLIENT_SECRET = ''
-REDIRECT_URI = ''
+# Carrega variáveis do arquivo .env (se existir) no diretório do projeto
+load_dotenv()
+
+# Obtenha as credenciais a partir das variáveis de ambiente (ou .env)
+CLIENT_ID = os.getenv('CLIENT_ID')
+CLIENT_SECRET = os.getenv('CLIENT_SECRET')
+REDIRECT_URI = os.getenv('REDIRECT_URI')
+
+# Validação simples: se alguma variável obrigatória não estiver definida, avisa e encerra
+if not CLIENT_ID or not CLIENT_SECRET or not REDIRECT_URI:
+    print("As variáveis CLIENT_ID, CLIENT_SECRET ou REDIRECT_URI não estão definidas.")
+    print("Crie um arquivo .env na raiz do projeto com as chaves ou exporte as variáveis de ambiente.")
+    print("Exemplo (.env):")
+    print("CLIENT_ID='seu_id'")
+    print("CLIENT_SECRET='seu_secret'")
+    print("REDIRECT_URI='seu_redirect_uri'")
+    exit(1)
 
 # Escopos necessários para manipular playlists
 SCOPE = 'playlist-modify-public playlist-modify-private playlist-read-private'
