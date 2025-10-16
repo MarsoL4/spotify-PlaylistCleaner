@@ -3,3 +3,4 @@
 
 # Outros padrões úteis
 .cache
+__pycache__
