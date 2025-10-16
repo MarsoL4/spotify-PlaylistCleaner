@@ -1,6 +1,5 @@
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
-from datetime import datetime
 import time
 from spotipy.exceptions import SpotifyException
 
