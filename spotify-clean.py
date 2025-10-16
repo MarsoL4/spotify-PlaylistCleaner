@@ -340,108 +340,135 @@ if __name__ == "__main__":
         print("Nenhuma playlist criada por você foi encontrada!")
         exit()
 
-    print("* Spotify Playlist Cleaner *\n")
-    print("| Selecione uma das opções abaixo: ")
-    print("""
-          1 - Remover músicas de um artista específico
-          2 - Remover uma música específica
-          3 - Remover músicas duplicadas (mesmo nome E mesmos artistas) de uma playlist
-          4 - Remover músicas lançadas antes de um certo ano
-          5 - Sair
-          """)
-    try:
-        opcao = int(input("Opção: "))
-    except ValueError:
-        print("Opção inválida.")
-        exit()
-
-    match opcao:
-        case 1:
-            show_playlists(playlists)
-
-            while True:
-                try:
-                    escolha = int(input("\nDigite o número da playlist desejada: "))
-                    if 1 <= escolha <= len(playlists):
-                        playlist_escolhida = playlists[escolha - 1]
-                        break
-                    else:
-                        print("Número inválido. Tente novamente.")
-                except ValueError:
-                    print("Por favor, digite um número válido.")
-
-            artist_name = input("Nome do artista para remover: ")
-
-            print(f"\nRemovendo músicas de '{artist_name}' da playlist '{playlist_escolhida['name']}'...\n")
-            remove_artist_from_playlist(playlist_escolhida['id'], artist_name)
-
-        case 2:
-            show_playlists(playlists)
-
-            while True:
-                try:
-                    escolha = int(input("\nDigite o número da playlist desejada: "))
-                    if 1 <= escolha <= len(playlists):
-                        playlist_escolhida = playlists[escolha - 1]
-                        break
-                    else:
-                        print("Número inválido. Tente novamente.")
-                except ValueError:
-                    print("Por favor, digite um número válido.")
-
-            print("Deseja listar as musicas dessa playlist? (s/n)")
-            listar = str(input()).strip().lower()
-            if listar == 's':
-                listar_musicas_playlist(playlist_escolhida['id'])
-                print("-------------------------------")
-
-            track_name = input("Nome da música para remover: ")
-
-            print(f"\nRemovendo músicas '{track_name}' da playlist '{playlist_escolhida['name']}'...\n")
-            remove_music_from_playlist(playlist_escolhida['id'], track_name)
-
-        case 3:
-            show_playlists(playlists)
-
-            while True:
-                try:
-                    escolha = int(input("\nDigite o número da playlist desejada: "))
-                    if 1 <= escolha <= len(playlists):
-                        playlist_escolhida = playlists[escolha - 1]
-                        break
-                    else:
-                        print("Número inválido. Tente novamente.")
-                except ValueError:
-                    print("Por favor, digite um número válido.")
-
-            remove_duplicates_from_playlist(playlist_escolhida['id'])
-
-        case 4:
-            show_playlists(playlists)
-
-            while True:
-                try:
-                    escolha = int(input("\nDigite o número da playlist desejada: "))
-                    if 1 <= escolha <= len(playlists):
-                        playlist_escolhida = playlists[escolha - 1]
-                        break
-                    else:
-                        print("Número inválido. Tente novamente.")
-                except ValueError:
-                    print("Por favor, digite um número válido.")
-
-            while True:
-                ano_str = input("Digite o ano (ex: 2010) - remover músicas lançadas ANTES deste ano: ").strip()
-                try:
-                    ano = int(ano_str)
-                    break
-                except ValueError:
-                    print("Por favor, digite um ano válido (ex: 2010).")
-
-            remove_tracks_before_year_from_playlist(playlist_escolhida['id'], ano)
-
-        case 5:
+    while True:
+        print("* Spotify Playlist Cleaner *")
+        print("-------------------------------------------------------------------------------")
+        print("""
+            1 - Remover músicas de um artista específico
+            2 - Remover uma música específica
+            3 - Remover músicas duplicadas (mesmo nome E mesmos artistas) de uma playlist
+            4 - Remover músicas lançadas antes de um certo ano
+            5 - Sair
+            """)
+        try:
+            opcao = int(input("Digite o número da opção que deseja: "))
+        except ValueError:
+            print("Opção inválida.")
             exit()
 
-        case _:
-            print("Opção inválida.")
+        match opcao:
+            case 1:
+                show_playlists(playlists)
+
+                while True:
+                    try:
+                        escolha = int(input("\nDigite o número da playlist desejada ou 0 para voltar: "))
+                        if escolha == 0: break
+                        elif 1 <= escolha <= len(playlists):
+                            playlist_escolhida = playlists[escolha - 1]
+                            
+                            artist_name = input("Nome do artista para remover: ")
+                            
+                            print(f"\nRemovendo músicas de '{artist_name}' da playlist '{playlist_escolhida['name']}'...\n")
+                            remove_artist_from_playlist(playlist_escolhida['id'], artist_name)     
+                            break
+                        else:
+                            print("Número inválido. Tente novamente.")         
+                    except ValueError:
+                        print("Por favor, digite um número válido.")
+
+            case 2:
+                show_playlists(playlists)
+
+                while True:
+                    try:
+                        escolha = int(input("\nDigite o número da playlist desejada ou 0 para voltar: "))
+                        if escolha == 0:
+                            break
+                        if 1 <= escolha <= len(playlists):
+                            playlist_escolhida = playlists[escolha - 1]
+                            break
+                        else:
+                            print("Número inválido. Tente novamente.")
+                    except ValueError:
+                        print("Por favor, digite um número válido.")
+
+                # Se o usuário digitou 0 acima, volta ao menu principal
+                try:
+                    playlist_escolhida
+                except NameError:
+                    # usuário escolheu voltar
+                    continue
+
+                print("Deseja listar as musicas dessa playlist? (s/n)")
+                listar = str(input()).strip().lower()
+                if listar == 's':
+                    listar_musicas_playlist(playlist_escolhida['id'])
+                    print("-------------------------------")
+
+                track_name = input("Nome da música para remover: ")
+
+                print(f"\nRemovendo músicas '{track_name}' da playlist '{playlist_escolhida['name']}'...\n")
+                remove_music_from_playlist(playlist_escolhida['id'], track_name)
+
+            case 3:
+                show_playlists(playlists)
+
+                while True:
+                    try:
+                        escolha = int(input("\nDigite o número da playlist desejada ou 0 para voltar: "))
+                        if escolha == 0:
+                            break
+                        if 1 <= escolha <= len(playlists):
+                            playlist_escolhida = playlists[escolha - 1]
+                            break
+                        else:
+                            print("Número inválido. Tente novamente.")
+                    except ValueError:
+                        print("Por favor, digite um número válido.")
+
+                # Se o usuário digitou 0 acima, volta ao menu principal
+                try:
+                    playlist_escolhida
+                except NameError:
+                    continue
+
+                remove_duplicates_from_playlist(playlist_escolhida['id'])
+
+            case 4:
+                show_playlists(playlists)
+
+                while True:
+                    try:
+                        escolha = int(input("\nDigite o número da playlist desejada ou 0 para voltar: "))
+                        if escolha == 0:
+                            break
+                        if 1 <= escolha <= len(playlists):
+                            playlist_escolhida = playlists[escolha - 1]
+                            break
+                        else:
+                            print("Número inválido. Tente novamente.")
+                    except ValueError:
+                        print("Por favor, digite um número válido.")
+
+                # Se o usuário digitou 0 acima, volta ao menu principal
+                try:
+                    playlist_escolhida
+                except NameError:
+                    continue
+
+                while True:
+                    ano_str = input("Digite o ano (ex: 2010) - remover músicas lançadas ANTES deste ano: ").strip()
+                    try:
+                        ano = int(ano_str)
+                        break
+                    except ValueError:
+                        print("Por favor, digite um ano válido (ex: 2010).")
+
+                remove_tracks_before_year_from_playlist(playlist_escolhida['id'], ano)
+
+            case 5:
+                exit()
+
+            case _:
+                print("Opção inválida.")
