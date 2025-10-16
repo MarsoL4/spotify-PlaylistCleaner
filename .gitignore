@@ -1,0 +1,5 @@
+# Ignorar credenciais locais
+.env
+
+# Outros padrões úteis
+.cache
