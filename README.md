@@ -12,14 +12,15 @@ Script em Python para limpar playlists **criadas por você** no Spotify, com op�
 ## 1) Criar app no Spotify for Developers
 
 1. Acesse: https://developer.spotify.com  
-2. Faça login e clique em **Create app**  
-3. Preencha nome/descrição e crie o app  
-4. No app criado, copie:
+2. Faça login
+3. Entre no seu Dashboard e clique em **Create app**  
+4. Preencha nome/descrição e crie o app  
+5. No app criado, copie:
    - **Client ID**
    - **Client Secret**
-5. Em **Edit Settings**, adicione um Redirect URI (exemplo):
+6. Em **Edit Settings**, adicione um Redirect URI (exemplo):
    - `http://127.0.0.1:8888/callback`
-6. Salve as alterações
+7. Salve as alterações
 
 > O Redirect URI configurado no painel deve ser exatamente o mesmo usado no arquivo `.env`.
 
