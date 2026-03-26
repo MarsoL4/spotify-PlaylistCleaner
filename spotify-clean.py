@@ -341,7 +341,7 @@ if __name__ == "__main__":
         exit()
 
     while True:
-        print("* Spotify Playlist Cleaner *")
+        print("\n                      * Spotify Playlist Cleaner *                             ")
         print("-------------------------------------------------------------------------------")
         print("""
             1 - Remover músicas de um artista específico
