@@ -4,4 +4,4 @@
 # Outros padrões úteis
 .cache
 __pycache__
-./venv
+.venv/
