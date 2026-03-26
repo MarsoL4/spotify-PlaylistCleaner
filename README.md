@@ -11,7 +11,7 @@ Script em Python para limpar playlists **criadas por você** no Spotify, com op�
 
 ## 1) Criar app no Spotify for Developers
 
-1. Acesse: https://developer.spotify.com/dashboard  
+1. Acesse: https://developer.spotify.com  
 2. Faça login e clique em **Create app**  
 3. Preencha nome/descrição e crie o app  
 4. No app criado, copie:
