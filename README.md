@@ -57,7 +57,7 @@ Crie um arquivo `.env` na raiz do projeto com este conteúdo:
 ```env
 CLIENT_ID='seu_client_id'
 CLIENT_SECRET='seu_client_secret'
-REDIRECT_URI='http://127.0.0.1:8888/callback'
+REDIRECT_URI='seu_redirect_uri'
 ```
 
 ## 5) Executar o programa
